@@ -174,6 +174,363 @@ body:not(.fr) [lang-fr]{display:none!important;}
   .duo-wrap:hover .duo-a{left:36px;top:18px;}
   .duo-wrap:hover .duo-b{left:0;top:0;}
 }
+
+/* ========= SCROLL PAR PAGE ========= */
+html { scroll-snap-type: y mandatory; }
+.hero {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+  padding-bottom: 60px !important;
+}
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ticker { scroll-snap-align: none; min-height: auto; display: block; }
+footer { scroll-snap-align: start; }
+
+/* ========= CORRECTIONS TÉLÉPHONES HERO ========= */
+/* Téléphones alignés côte à côte sans chevauchement */
+.hphones {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-end !important;
+  gap: 20px !important;
+  margin-bottom: 0 !important;
+}
+/* Les téléphones côtés (hph-s) pas décalés vers le bas */
+.hph-s {
+  transform: none !important;
+  opacity: 0.85 !important;
+  margin-bottom: 0 !important;
+}
+.hph-s:hover { opacity: 1 !important; transform: translateY(-4px) !important; }
+/* Téléphone du milieu légèrement plus haut */
+.hphones > div:nth-child(2) { transform: translateY(-12px); }
+
+/* ========= DUO WRAP (PASSPORT) - ROND VISIBLE ========= */
+.duo-wrap { overflow: visible !important; }
+.duo-a > div,
+.duo-b > div { overflow: visible !important; }
+
+/* ========= BARRE DE PROGRESSION ========= */
+#yprog {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, var(--p3), var(--p));
+  z-index: 9999; width: 0%;
+  transition: width .08s linear;
+  pointer-events: none;
+}
+
+/* ========= CURSEUR PERSONNALISÉ ========= */
+* { cursor: none !important; }
+#ycursor {
+  position: fixed;
+  width: 14px; height: 14px;
+  background: var(--p);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform .15s ease, width .2s, height .2s, background .2s;
+  mix-blend-mode: normal;
+}
+#ycursor-ring {
+  position: fixed;
+  width: 40px; height: 40px;
+  border: 2px solid var(--p);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: left .1s ease, top .1s ease, width .2s, height .2s, opacity .2s;
+  opacity: 0.6;
+}
+/* Sur les éléments cliquables : curseur s'agrandit */
+a:hover ~ #ycursor, button:hover ~ #ycursor { transform: translate(-50%,-50%) scale(1.5); }
+
+/* ========= NAV MASQUAGE AU SCROLL ========= */
+nav { transition: box-shadow .3s, transform .45s ease, opacity .45s ease !important; }
+nav.scrolled-down { transform: translateX(-50%) translateY(-80px) !important; opacity: 0 !important; }
+
+/* ========= ANIMATIONS REVEAL AMÉLIORÉES ========= */
+.rv {
+  opacity: 0;
+  transform: translateY(45px);
+  transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1) !important;
+}
+.rv.in { opacity: 1 !important; transform: translateY(0) !important; }
+.rv.d1 { transition-delay: .13s !important; }
+.rv.d2 { transition-delay: .25s !important; }
+.rv.d3 { transition-delay: .38s !important; }
+
+/* ========= STATS DANS L'INTRO ========= */
+.intro-stats {
+  display: flex;
+  gap: 36px;
+  margin-top: 36px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.sn { font-size: 40px; font-weight: 900; color: var(--p); line-height: 1; }
+.sl { font-size: 12px; color: var(--muted); margin-top: 4px; font-weight: 500; letter-spacing: .3px; }
+
+/* ========= HOVER CARDS ========= */
+.icard { transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s !important; }
+.icard:hover { transform: translateY(-8px) !important; box-shadow: 0 22px 52px rgba(0,0,0,.09) !important; }
+.tc { transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s !important; }
+.tc:hover { transform: translateY(-8px) !important; }
+.chip { transition: all .2s !important; }
+.chip:hover { transform: translateY(-2px); }
+
+/* ========= PARTICULES HÉRO ========= */
+.yp { position: absolute; border-radius: 50%; pointer-events: none; animation: ydrift linear infinite; opacity: 0; }
+@keyframes ydrift {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { transform: translateY(-60px) rotate(360deg); opacity: 0; }
+}
+
+/* ========= PARALLAXE HERO ========= */
+.hero-content { will-change: transform; }
+
+/* ========= SECTIONS PLEIN ÉCRAN ========= */
+.intro { min-height: 100vh !important; display: flex !important; align-items: center !important; }
+.intro-inner { width: 100%; }
+.fsec { min-height: 100vh !important; display: flex !important; align-items: center !important; }
+.fsec .fin { width: 100%; }
+.how-sec { min-height: 100vh !important; display: flex !important; align-items: center !important; }
+.how-sec > div { width: 100%; }
+.fgrid-sec { min-height: 100vh !important; display: flex !important; flex-direction: column !important; justify-content: center !important; }
+.tsec { min-height: 100vh !important; display: flex !important; flex-direction: column !important; justify-content: center !important; }
+.ctasec { min-height: 80vh !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; }
+
+@media(max-width:900px){
+  html { scroll-snap-type: none; }
+  * { cursor: auto !important; }
+  #ycursor, #ycursor-ring { display: none !important; }
+  section, .hero, .intro, .fsec, .how-sec, .fgrid-sec, .tsec { min-height: auto !important; }
+}
+
+
+/* ========= TYPEWRITER / TEXT REVEAL ANIMATIONS ========= */
+.split-text-reveal span.char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(70%) rotateX(-80deg);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(.16,1,.3,1);
+  transform-origin: bottom center;
+  backface-visibility: hidden;
+}
+.split-text-reveal.revealed span.char {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+/* ========= HERO ELEMENTS ========= */
+.hero-orb {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(200,80,26,.05) 0%, transparent 65%);
+  animation: orbPulse 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes orbPulse {
+  0%,100% { transform: translate(-50%,-50%) scale(1); opacity:.5; }
+  50% { transform: translate(-50%,-50%) scale(1.2); opacity:1; }
+}
+.hero-line {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--p), transparent);
+  animation: heroLine 2.5s 1s ease forwards;
+}
+@keyframes heroLine { to { width: 60%; } }
+
+/* ========= SCROLL INDICATOR ========= */
+.scroll-indicator {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  animation: fu 1s 1.5s ease both;
+  z-index: 10;
+}
+.scroll-indicator span {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.scroll-mouse {
+  width: 22px; height: 36px;
+  border: 2px solid var(--border2);
+  border-radius: 99px;
+  position: relative;
+}
+.scroll-mouse::after {
+  content: '';
+  position: absolute;
+  top: 6px; left: 50%;
+  transform: translateX(-50%);
+  width: 4px; height: 6px;
+  background: var(--p);
+  border-radius: 99px;
+  animation: scrollDot 2s ease-in-out infinite;
+}
+@keyframes scrollDot {
+  0%,100% { top:6px; opacity:1; }
+  80% { top:20px; opacity:0; }
+}
+
+/* ========= GLOBAL DATA-ANIM ========= */
+[data-anim] {
+  opacity: 0;
+  transition: opacity .8s ease, transform .8s cubic-bezier(.16,1,.3,1), filter .8s ease;
+}
+[data-anim="fade"] { transform: translateY(32px); }
+[data-anim="left"] { transform: translateX(-40px); }
+[data-anim="right"] { transform: translateX(40px); }
+[data-anim="scale"] { transform: scale(0.88); }
+[data-anim="blur"] { filter: blur(10px); transform: translateY(20px); }
+[data-anim].anim-done {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+[data-delay="1"] { transition-delay: .12s !important; }
+[data-delay="2"] { transition-delay: .24s !important; }
+[data-delay="3"] { transition-delay: .36s !important; }
+[data-delay="4"] { transition-delay: .48s !important; }
+[data-delay="5"] { transition-delay: .60s !important; }
+
+/* ========= MORPH BLOB ========= */
+.morph-blob {
+  position: absolute;
+  width: 420px; height: 420px;
+  background: radial-gradient(ellipse, rgba(200,80,26,.04), transparent 70%);
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  animation: morphBlob 14s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes morphBlob {
+  0%,100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+  25% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 40% 70% / 50% 60% 30% 60%; }
+  75% { border-radius: 60% 40% 60% 40% / 30% 70% 40% 60%; }
+}
+
+/* ========= SHIMMER ON GRADIENT TEXT ========= */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.shimmer-text {
+  background: linear-gradient(90deg, var(--p) 0%, var(--p3) 25%, #ffc49a 50%, var(--p3) 75%, var(--p) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ========= PHONE SCANLINE ========= */
+.phone-scanline {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(200,80,26,.5), transparent);
+  animation: scanline 4s linear infinite;
+  pointer-events: none;
+  z-index: 20;
+}
+@keyframes scanline {
+  0% { top:0; opacity:0; }
+  5% { opacity:.8; }
+  95% { opacity:.8; }
+  100% { top:100%; opacity:0; }
+}
+
+/* ========= PHONE FLOAT ========= */
+.hphones > *:nth-child(1) { animation: phoneFloat 4s ease-in-out infinite !important; }
+.hphones > *:nth-child(2) { animation: phoneFloat 4s .7s ease-in-out infinite !important; }
+.hphones > *:nth-child(3) { animation: phoneFloat 4s 1.4s ease-in-out infinite !important; }
+@keyframes phoneFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ========= COUNTER GRADIENT ========= */
+.sn {
+  background: linear-gradient(135deg, var(--p3), var(--p));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========= STAGGER GRID ITEMS (initial hidden for JS) ========= */
+.grid6 .gc,
+.how-grid .how-step,
+.intro-right .icard,
+.tgrid .tc {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .65s ease, transform .65s cubic-bezier(.16,1,.3,1);
+}
+
+/* ========= CARD HOVER GLOW ========= */
+.gc::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(200,80,26,.06), transparent 60%);
+  opacity: 0;
+  transition: opacity .3s;
+  pointer-events: none;
+}
+.gc { position: relative; }
+.gc:hover::after { opacity: 1; }
+
+/* ========= LINE DRAW ACCENT ========= */
+.line-draw {
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--p), var(--p3));
+  border-radius: 99px;
+  margin: 12px 0 24px;
+  transition: width 1.4s cubic-bezier(.16,1,.3,1) .3s;
+}
+.line-draw.drawn { width: 60px; }
+
+@media(max-width:900px) {
+  .scroll-indicator { display: none; }
+  .morph-blob { display: none; }
+  .phone-scanline { display: none; }
+  [data-anim] { opacity: 1 !important; transform: none !important; filter: none !important; }
+}
 </style>
 </head>
 <body>
@@ -263,6 +620,20 @@ body:not(.fr) [lang-fr]{display:none!important;}
       <h2 lang-en>The app built for<br>the solo traveler.</h2><h2 lang-fr>L'app conçue pour<br>le voyageur solo.</h2>
       <p lang-en>Solo travel is one of the most rewarding experiences — but it comes with real challenges: loneliness, safety concerns, and complex logistics. YATHRA was built to solve exactly that.</p>
       <p lang-fr>Le voyage solo est l'une des expériences les plus enrichissantes — mais avec de vrais défis : solitude, sécurité, logistique complexe. YATHRA a été conçu pour résoudre exactement ça.</p>
+      <div class="intro-stats">
+        <div class="rv d1">
+          <div class="sn" data-target="4200" data-suffix="+">4200+</div>
+          <div class="sl"><span lang-en>Travelers waiting</span><span lang-fr>Voyageurs en attente</span></div>
+        </div>
+        <div class="rv d2">
+          <div class="sn" data-target="120" data-suffix="+">120+</div>
+          <div class="sl"><span lang-en>Countries</span><span lang-fr>Pays</span></div>
+        </div>
+        <div class="rv d3">
+          <div class="sn" data-target="98" data-suffix="%">98%</div>
+          <div class="sl"><span lang-en>Recommend it</span><span lang-fr>Le recommandent</span></div>
+        </div>
+      </div>
     </div>
     <div class="intro-right">
       <div class="icard rv d1"><div class="icard-icon">🤝</div><h4 lang-en>Find companions</h4><h4 lang-fr>Trouver compagnons</h4><p lang-en>Match with compatible travelers for your next destination.</p><p lang-fr>Match avec des voyageurs compatibles pour ta prochaine destination.</p></div>
@@ -454,12 +825,304 @@ body:not(.fr) [lang-fr]{display:none!important;}
 </footer>
 
 <script>
-const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');}),{threshold:.08});
-document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-const tk=document.getElementById('tk');tk.innerHTML+=tk.innerHTML;
-function setLang(l){document.body.classList.toggle('fr',l==='fr');document.getElementById('b-en').classList.toggle('on',l==='en');document.getElementById('b-fr').classList.toggle('on',l==='fr');localStorage.setItem('yl',l);}
-if(localStorage.getItem('yl')==='fr')setLang('fr');
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',window.scrollY>30));
+// ===== CORE =====
+const obs = new IntersectionObserver(e => e.forEach(x => {
+  if (x.isIntersecting) x.target.classList.add('in');
+}), {threshold:.08});
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// Ticker duplicate
+const tkEl = document.getElementById('tk');
+if (tkEl) tkEl.innerHTML += tkEl.innerHTML;
+
+// Language
+function setLang(l) {
+  document.body.classList.toggle('fr', l==='fr');
+  document.getElementById('b-en').classList.toggle('on', l==='en');
+  document.getElementById('b-fr').classList.toggle('on', l==='fr');
+  localStorage.setItem('yl', l);
+}
+if (localStorage.getItem('yl')==='fr') setLang('fr');
+
+// Nav scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('sc', window.scrollY > 30);
+}, {passive:true});
+
+// ===== PROGRESS BAR =====
+(function(){
+  const bar = document.createElement('div'); bar.id = 'yprog';
+  document.body.prepend(bar);
+  window.addEventListener('scroll', () => {
+    const max = document.body.scrollHeight - window.innerHeight;
+    if (max > 0) bar.style.width = (window.scrollY / max * 100) + '%';
+  }, {passive:true});
+})();
+
+// ===== CUSTOM CURSOR =====
+(function(){
+  if (window.innerWidth < 900) return;
+  const c = document.createElement('div'); c.id = 'ycursor';
+  const r = document.createElement('div'); r.id = 'ycursor-ring';
+  document.body.appendChild(c); document.body.appendChild(r);
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    c.style.left = mx+'px'; c.style.top = my+'px';
+  });
+  (function loop() {
+    rx += (mx-rx)*.12; ry += (my-ry)*.12;
+    r.style.left = rx+'px'; r.style.top = ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button,.icard,.gc,.tc,.how-step,.chip,.hph-s,.abtn').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      c.style.width='8px'; c.style.height='8px';
+      r.style.width='52px'; r.style.height='52px'; r.style.opacity='.3';
+    });
+    el.addEventListener('mouseleave', () => {
+      c.style.width='14px'; c.style.height='14px';
+      r.style.width='40px'; r.style.height='40px'; r.style.opacity='.6';
+    });
+  });
+})();
+
+// ===== NAV HIDE/SHOW =====
+(function(){
+  const nav = document.getElementById('nav');
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > lastY && y > 100) nav.classList.add('scrolled-down');
+    else nav.classList.remove('scrolled-down');
+    lastY = y;
+  }, {passive:true});
+})();
+
+// ===== HERO PARTICLES =====
+(function(){
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  const colors = ['rgba(200,80,26,.1)','rgba(53,102,97,.09)','rgba(200,80,26,.05)','rgba(245,222,192,.35)'];
+  for (let i=0; i<14; i++) {
+    const p = document.createElement('div'); p.className='yp';
+    const s = 3 + Math.random()*7;
+    p.style.cssText = `width:${s}px;height:${s}px;background:${colors[i%4]};left:${Math.random()*100}%;bottom:-20px;animation-duration:${10+Math.random()*14}s;animation-delay:${Math.random()*10}s;`;
+    hero.appendChild(p);
+  }
+})();
+
+// ===== HERO ORB + LINE =====
+(function(){
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  const orb = document.createElement('div'); orb.className = 'hero-orb';
+  hero.prepend(orb);
+  const line = document.createElement('div'); line.className = 'hero-line';
+  hero.appendChild(line);
+  // Scroll indicator
+  const si = document.createElement('div'); si.className = 'scroll-indicator';
+  si.innerHTML = '<div class="scroll-mouse"></div><span lang-en>Scroll</span><span lang-fr>Défiler</span>';
+  hero.appendChild(si);
+})();
+
+// ===== SHIMMER ON HERO TITLE =====
+(function(){
+  const l2 = document.querySelector('.ht .l2');
+  if (l2) l2.classList.add('shimmer-text');
+})();
+
+// ===== HERO PARALLAX =====
+(function(){
+  if (window.innerWidth < 900) return;
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < window.innerHeight)
+      hero.style.transform = 'translateY(' + (window.scrollY*.17) + 'px)';
+  }, {passive:true});
+})();
+
+// ===== COUNTERS =====
+(function(){
+  const cObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !e.target.dataset.animated) {
+        e.target.dataset.animated = '1';
+        const target = parseInt(e.target.dataset.target);
+        const suffix = e.target.dataset.suffix || '';
+        let cur = 0; const step = target/70;
+        const t = setInterval(() => {
+          cur = Math.min(cur+step, target);
+          e.target.textContent = Math.floor(cur).toLocaleString() + suffix;
+          if (cur >= target) clearInterval(t);
+        }, 14);
+      }
+    });
+  }, {threshold:.4});
+  document.querySelectorAll('[data-target]').forEach(el => cObs.observe(el));
+})();
+
+// ===== SPLIT TEXT TITLES (lettre par lettre au scroll) =====
+(function(){
+  // Prepare split text elements
+  function prepareSplit(el) {
+    if (el.dataset.splitDone) return;
+    el.dataset.splitDone = '1';
+    el.classList.add('split-text-reveal');
+    // Work on text nodes inside (ignore hidden lang spans)
+    const isFr = document.body.classList.contains('fr');
+    // Get the visible span (lang-en or lang-fr)
+    let targetEl = null;
+    el.querySelectorAll('[lang-en],[lang-fr]').forEach(span => {
+      const isEnSpan = span.hasAttribute('lang-en');
+      const isFrSpan = span.hasAttribute('lang-fr');
+      if ((isEnSpan && !isFr) || (isFrSpan && isFr)) {
+        targetEl = span;
+      }
+    });
+    if (!targetEl && el.children.length === 0) targetEl = el;
+    if (!targetEl) return;
+    
+    const text = targetEl.textContent;
+    targetEl.textContent = '';
+    let delay = 0;
+    for (let i=0; i<text.length; i++) {
+      const ch = text[i];
+      const span = document.createElement('span');
+      span.className = 'char';
+      span.textContent = ch === ' ' ? ' ' : ch;
+      span.style.transitionDelay = delay + 's';
+      delay += (ch === ' ') ? 0.04 : 0.03;
+      targetEl.appendChild(span);
+    }
+  }
+
+  // Observe section headings for reveal
+  const splitObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        prepareSplit(e.target);
+        setTimeout(() => e.target.classList.add('revealed'), 50);
+        splitObs.unobserve(e.target);
+      }
+    });
+  }, {threshold:.2});
+
+  // Target section headings (not the hero which has CSS animations)
+  document.querySelectorAll('.ftxt h2, .fgrid-hd h2, .how-sec h2, .thd h2').forEach(h => {
+    splitObs.observe(h);
+  });
+})();
+
+// ===== GLOBAL DATA-ANIM OBSERVER =====
+(function(){
+  const aObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('anim-done');
+        aObs.unobserve(e.target);
+      }
+    });
+  }, {threshold:.1, rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('[data-anim]').forEach(el => aObs.observe(el));
+})();
+
+// ===== STAGGER GRIDS =====
+(function(){
+  const gObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const items = e.target.querySelectorAll('.gc,.how-step,.icard,.tc');
+        items.forEach((item, i) => {
+          setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+          }, i * 85);
+        });
+        gObs.unobserve(e.target);
+      }
+    });
+  }, {threshold:.05});
+
+  document.querySelectorAll('.grid6,.how-grid,.intro-right,.tgrid').forEach(g => gObs.observe(g));
+})();
+
+// ===== LINE DRAW =====
+(function(){
+  const lObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('drawn');
+        lObs.unobserve(e.target);
+      }
+    });
+  }, {threshold:.5});
+  document.querySelectorAll('.line-draw').forEach(el => lObs.observe(el));
+})();
+
+// Add line-draw accents after section eyebrow labels
+document.querySelectorAll('.ey').forEach(ey => {
+  const line = document.createElement('div');
+  line.className = 'line-draw';
+  ey.parentNode.insertBefore(line, ey.nextSibling);
+});
+
+// ===== MORPH BLOBS IN SECTIONS =====
+(function(){
+  const colors = ['rgba(200,80,26,.04)','rgba(53,102,97,.04)','rgba(245,222,192,.08)','rgba(200,80,26,.03)'];
+  document.querySelectorAll('.fsec,.fgrid-sec,.how-sec,.tsec').forEach((sec, i) => {
+    sec.style.position = 'relative';
+    sec.style.overflow = 'hidden';
+    const blob = document.createElement('div');
+    blob.className = 'morph-blob';
+    blob.style.cssText = `right:-100px;top:50%;transform:translateY(-50%);background:radial-gradient(ellipse,${colors[i%4]},transparent 70%);animation-delay:${i*2}s;`;
+    sec.prepend(blob);
+  });
+})();
+
+// ===== CARD TILT (desktop) =====
+(function(){
+  if (window.innerWidth < 900) return;
+  document.querySelectorAll('.icard,.tc').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX-rect.left)/rect.width-.5;
+      const y = (e.clientY-rect.top)/rect.height-.5;
+      card.style.transform = `perspective(500px) rotateY(${x*7}deg) rotateX(${-y*7}deg) translateY(-8px)`;
+      card.style.boxShadow = `${-x*8}px ${y*8}px 28px rgba(0,0,0,.09)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.boxShadow = '';
+    });
+  });
+})();
+
+// ===== PHONE SCANLINES =====
+(function(){
+  document.querySelectorAll('.hph-s > div, .hph-s > *').forEach(phone => {
+    if (phone.style) {
+      const sl = document.createElement('div');
+      sl.className = 'phone-scanline';
+      phone.style.position = 'relative';
+      phone.appendChild(sl);
+    }
+  });
+})();
+
+// ===== SECTION PARALLAX (images) =====
+(function(){
+  if (window.innerWidth < 900) return;
+  window.addEventListener('scroll', () => {
+    document.querySelectorAll('.fvis').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const offset = (window.innerHeight/2 - rect.top - rect.height/2) * .06;
+      el.style.transform = `translateY(${offset}px)`;
+    });
+  }, {passive:true});
+})();
+
 </script>
 </body>
 </html>
